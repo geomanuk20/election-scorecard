@@ -60,7 +60,17 @@ app.get('/api/data', async (req, res) => {
     }
     try {
         const data = await ElectionData.findById(DATA_ID);
-        res.json(data || {});
+        // If no data exists yet, return the default values
+        if (!data) {
+            return res.json({
+                keralaTotal: 20,
+                keralaSubtotal: 20,
+                ldf: 0,
+                udf: 0,
+                nda: 0
+            });
+        }
+        res.json(data);
     } catch (err) {
         console.error('GET Error:', err);
         res.status(500).json({ message: err.message });

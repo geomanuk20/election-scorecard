@@ -20,11 +20,11 @@ const Admin = () => {
                 const res = await axios.get(API_URL);
                 if (res.data) {
                     setFormData({
-                        keralaTotal: res.data.keralaTotal,
-                        keralaSubtotal: res.data.keralaSubtotal,
-                        ldf: res.data.ldf,
-                        udf: res.data.udf,
-                        nda: res.data.nda
+                        keralaTotal: res.data.keralaTotal ?? 20,
+                        keralaSubtotal: res.data.keralaSubtotal ?? 20,
+                        ldf: res.data.ldf ?? 0,
+                        udf: res.data.udf ?? 0,
+                        nda: res.data.nda ?? 0
                     });
                 }
             } catch (err) {
