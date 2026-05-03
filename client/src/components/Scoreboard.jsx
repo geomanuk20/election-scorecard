@@ -15,7 +15,8 @@ const Scoreboard = () => {
 
     const fetchData = async () => {
         try {
-            const res = await axios.get(API_URL);
+            // Add a timestamp to prevent browser caching
+            const res = await axios.get(`${API_URL}?t=${Date.now()}`);
             if (res.data) {
                 setData(res.data);
             }
@@ -26,7 +27,7 @@ const Scoreboard = () => {
 
     useEffect(() => {
         fetchData();
-        const interval = setInterval(fetchData, 5000); 
+        const interval = setInterval(fetchData, 3000); // Poll every 3 seconds for faster updates
         return () => clearInterval(interval);
     }, []);
 
