@@ -50,6 +50,10 @@ body {
   border: 1px solid #ddd;
 }
 
+.kerala-column {
+  flex: 1.8; /* Make Kerala wider to fit both numbers */
+}
+
 .column:last-child {
   border-right: none;
 }
