@@ -12,7 +12,10 @@ const PORT = process.env.PORT || 5001;
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/election_db';
 
 mongoose.set('debug', true);
-mongoose.connect(MONGO_URI)
+mongoose.connect(MONGO_URI, {
+    serverSelectionTimeoutMS: 5000, // Timeout after 5 seconds instead of 30
+    socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
+})
     .then(() => {
         console.log('MongoDB connected');
         initializeData();
@@ -45,6 +48,9 @@ app.get('/health', (req, res) => {
 });
 
 app.get('/api/data', async (req, res) => {
+    if (mongoose.connection.readyState !== 1) {
+        return res.status(503).json({ message: 'Database not connected yet. Please wait a moment.' });
+    }
     try {
         const data = await ElectionData.findOne();
         res.json(data || {});
@@ -55,6 +61,9 @@ app.get('/api/data', async (req, res) => {
 });
 
 app.post('/api/data', async (req, res) => {
+    if (mongoose.connection.readyState !== 1) {
+        return res.status(503).json({ message: 'Database not connected yet. Please wait a moment.' });
+    }
     console.log('Received data update:', req.body);
     try {
         const { keralaTotal, keralaSubtotal, ldf, udf, nda } = req.body;
