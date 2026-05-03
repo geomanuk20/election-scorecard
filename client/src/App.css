@@ -16,9 +16,14 @@
   box-sizing: border-box;
 }
 
+html, body {
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: 'Inter', sans-serif;
-  background-color: transparent; /* Changed to transparent */
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -36,8 +41,7 @@ body {
   display: flex;
   background: white;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-  border: 1px solid #ddd;
+  /* Removed shadow and border for a cleaner overlay look */
 }
 
 .column {
