@@ -34,24 +34,16 @@ body {
 /* Scoreboard Styles */
 .scoreboard {
   display: flex;
-  background: transparent; /* Changed to transparent to show gaps */
-  gap: 10px; /* Added space between boxes */
-  width: 100%;
+  background: white;
+  overflow: hidden;
+  /* Removed borders and shadows for a seamless look */
 }
 
 .column {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: white; /* Ensure the box itself is white */
-  border-radius: 8px; /* Rounded corners for the 'box' look */
-  overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  border: 1px solid #ddd;
-}
-
-.kerala-column {
-  flex: 1.8; /* Make Kerala wider to fit both numbers */
+  /* Removed border-right */
 }
 
 .column:last-child {

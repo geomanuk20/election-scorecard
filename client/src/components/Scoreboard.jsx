@@ -35,7 +35,7 @@ const Scoreboard = () => {
         <div className="container">
             <div className="scoreboard">
                 {/* Kerala */}
-                <div className="column kerala-column">
+                <div className="column">
                     <div className="header kerala-header">KERALA</div>
                     <div className="content kerala-content">
                         <span className="total-red">{data.keralaTotal}</span>
