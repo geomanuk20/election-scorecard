@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scoreboard Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #5d6d2b;
+            --secondary: #d00d0d;
+            --accent: #008cff;
+            --warning: #e66a00;
+            --bg: #f4f7f6;
+            --card-bg: #ffffff;
+            --text: #333;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .admin-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h1 {
+            font-family: 'Oswald', sans-serif;
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--primary);
+            font-size: 2.5rem;
+            text-transform: uppercase;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-family: 'Oswald', sans-serif;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.3s;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background: #4a5722;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #666;
+            margin-top: 10px;
+        }
+
+        .btn-secondary:hover {
+            background: #444;
+        }
+
+        .success-msg {
+            display: none;
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="admin-card">
+        <h1>Admin Panel</h1>
+        
+        <div id="success" class="success-msg">Data Saved Successfully!</div>
+
+        <div class="grid-2">
+            <div class="form-group">
+                <label>Kerala Total (Red)</label>
+                <input type="number" id="kTotal" value="20">
+            </div>
+            <div class="form-group">
+                <label>Kerala Seats (Black)</label>
+                <input type="number" id="kSub" value="20">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label style="color: var(--secondary)">LDF Count</label>
+            <input type="number" id="ldf" value="5">
+        </div>
+
+        <div class="form-group">
+            <label style="color: var(--accent)">UDF Count</label>
+            <input type="number" id="udf" value="14">
+        </div>
+
+        <div class="form-group">
+            <label style="color: var(--warning)">NDA Count</label>
+            <input type="number" id="nda" value="1">
+        </div>
+
+        <button class="btn" onclick="saveData()">SAVE UPDATES</button>
+        <a href="index.html" class="btn btn-secondary">VIEW SCOREBOARD</a>
+    </div>
+
+    <script>
+        // Load current data
+        const data = JSON.parse(localStorage.getItem('electionData')) || {
+            keralaTotal: 20,
+            keralaSubtotal: 20,
+            ldf: 5,
+            udf: 14,
+            nda: 1
+        };
+
+        document.getElementById('kTotal').value = data.keralaTotal;
+        document.getElementById('kSub').value = data.keralaSubtotal;
+        document.getElementById('ldf').value = data.ldf;
+        document.getElementById('udf').value = data.udf;
+        document.getElementById('nda').value = data.nda;
+
+        function saveData() {
+            const newData = {
+                keralaTotal: document.getElementById('kTotal').value,
+                keralaSubtotal: document.getElementById('kSub').value,
+                ldf: document.getElementById('ldf').value,
+                udf: document.getElementById('udf').value,
+                nda: document.getElementById('nda').value
+            };
+
+            localStorage.setItem('electionData', JSON.stringify(newData));
+            
+            const success = document.getElementById('success');
+            success.style.display = 'block';
+            setTimeout(() => {
+                success.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

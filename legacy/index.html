@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Election Scoreboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --kerala-bg: #5d6d2b;
+            --ldf-bg: #d00d0d;
+            --udf-bg: #008cff;
+            --nda-bg: #e66a00;
+            --text-white: #ffffff;
+            --text-black: #000000;
+            --border-color: #ccc;
+            --font-family: 'Oswald', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: var(--font-family);
+        }
+
+        .scoreboard {
+            display: flex;
+            background-color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 100%;
+            max-width: 800px;
+            border: 1px solid #ddd;
+        }
+
+        .column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #ddd;
+        }
+
+        .column:last-child {
+            border-right: none;
+        }
+
+        .header {
+            padding: 10px 5px;
+            text-align: center;
+            color: var(--text-white);
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1;
+        }
+
+        .kerala-header { background-color: var(--kerala-bg); }
+        .ldf-header { background-color: var(--ldf-bg); }
+        .udf-header { background-color: var(--udf-bg); }
+        .nda-header { background-color: var(--nda-bg); }
+
+        .content {
+            background-color: #fff;
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 5rem;
+            font-weight: 700;
+            line-height: 1;
+            position: relative;
+        }
+
+        /* Specific style for Kerala column */
+        .kerala-content {
+            font-size: 4rem;
+            gap: 10px;
+        }
+
+        .kerala-content .total {
+            color: var(--ldf-bg); /* Red for the first 20 */
+        }
+
+        .kerala-content .separator {
+            width: 1px;
+            height: 60%;
+            background-color: #666;
+            margin: 0 5px;
+        }
+
+        .kerala-content .sub-total {
+            color: var(--text-black);
+            font-size: 3.5rem;
+        }
+
+        .number {
+            color: var(--text-black);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .header { font-size: 1.5rem; }
+            .content { height: 80px; font-size: 3rem; }
+            .kerala-content { font-size: 2.5rem; }
+            .kerala-content .sub-total { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="scoreboard">
+        <!-- Kerala -->
+        <div class="column">
+            <div class="header kerala-header">KERALA</div>
+            <div class="content kerala-content">
+                <span id="kerala-total" class="total">20</span>
+                <div class="separator"></div>
+                <span id="kerala-subtotal" class="sub-total">20</span>
+            </div>
+        </div>
+
+        <!-- LDF -->
+        <div class="column">
+            <div class="header ldf-header">LDF</div>
+            <div class="content">
+                <span id="ldf-count" class="number">5</span>
+            </div>
+        </div>
+
+        <!-- UDF -->
+        <div class="column">
+            <div class="header udf-header">UDF</div>
+            <div class="content">
+                <span id="udf-count" class="number">14</span>
+            </div>
+        </div>
+
+        <!-- NDA -->
+        <div class="column">
+            <div class="header nda-header">NDA</div>
+            <div class="content">
+                <span id="nda-count" class="number">1</span>
+            </div>
+        </div>
+    </div>
+
+    <a href="admin.html" style="position: fixed; bottom: 20px; right: 20px; color: #999; text-decoration: none; font-size: 0.8rem; font-family: sans-serif; opacity: 0.5;">Admin Panel</a>
+
+    <script>
+        function updateScoreboard() {
+            const data = JSON.parse(localStorage.getItem('electionData')) || {
+                keralaTotal: 20,
+                keralaSubtotal: 20,
+                ldf: 5,
+                udf: 14,
+                nda: 1
+            };
+
+            document.getElementById('kerala-total').innerText = data.keralaTotal;
+            document.getElementById('kerala-subtotal').innerText = data.keralaSubtotal;
+            document.getElementById('ldf-count').innerText = data.ldf;
+            document.getElementById('udf-count').innerText = data.udf;
+            document.getElementById('nda-count').innerText = data.nda;
+        }
+
+        // Update on load
+        window.addEventListener('load', updateScoreboard);
+        
+        // Listen for storage changes (updates in other tabs)
+        window.addEventListener('storage', updateScoreboard);
+    </script>
+</body>
+</html>

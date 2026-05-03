@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Inter:wght@400;600&display=swap');
+
+:root {
+  --kerala-bg: #5d6d2b;
+  --ldf-bg: #d00d0d;
+  --udf-bg: #008cff;
+  --nda-bg: #e66a00;
+  --text-white: #ffffff;
+  --text-black: #000000;
+  --bg-light: #f0f4f8;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-light);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 800px; /* Exact width from your original design */
+  padding: 20px;
+}
+
+/* Scoreboard Styles */
+.scoreboard {
+  display: flex;
+  background: white;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  border: 1px solid #ddd;
+}
+
+.column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #ddd;
+}
+
+.column:last-child {
+  border-right: none;
+}
+
+.header {
+  padding: 12px 5px;
+  text-align: center;
+  color: white;
+  font-family: 'Oswald', sans-serif;
+  font-size: 2.8rem; /* Large and bold as in image */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+
+.kerala-header { background-color: var(--kerala-bg); }
+.ldf-header { background-color: var(--ldf-bg); }
+.udf-header { background-color: var(--udf-bg); }
+.nda-header { background-color: var(--nda-bg); }
+
+.content {
+  background-color: #fff;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 6rem; /* Huge numbers */
+  font-weight: 700;
+  font-family: 'Oswald', sans-serif;
+  position: relative;
+  line-height: 1;
+}
+
+.kerala-content {
+  font-size: 5rem;
+  gap: 12px;
+}
+
+.total-red {
+  color: var(--ldf-bg);
+}
+
+.sub-total-black {
+  color: var(--text-black);
+}
+
+.separator {
+  width: 1px;
+  height: 60%;
+  background-color: #666;
+  margin: 0 5px;
+}
+
+.number {
+  color: var(--text-black);
+}
+
+/* Admin Styles (kept clean) */
+.admin-card {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.admin-title {
+  font-family: 'Oswald', sans-serif;
+  text-align: center;
+  margin-bottom: 30px;
+  color: var(--kerala-bg);
+  font-size: 2.5rem;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #eee;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-family: 'Oswald', sans-serif;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 10px;
+  border: none;
+}
+
+.btn-primary { background: var(--kerala-bg); color: white; }
+.btn-secondary { background: #eee; color: #666; }
+
+@media (max-width: 600px) {
+  .header { font-size: 1.8rem; }
+  .content { height: 100px; font-size: 3.5rem; }
+  .kerala-content { font-size: 3rem; }
+}
