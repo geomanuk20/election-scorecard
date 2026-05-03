@@ -25,7 +25,6 @@ mongoose.connect(MONGO_URI, {
 const electionSchema = new mongoose.Schema({
     _id: { type: String, default: 'main_scorecard' },
     keralaTotal: { type: Number, default: 20 },
-    keralaSubtotal: { type: Number, default: 20 },
     ldf: { type: Number, default: 5 },
     udf: { type: Number, default: 14 },
     nda: { type: Number, default: 1 },
@@ -66,7 +65,6 @@ app.get('/api/data', async (req, res) => {
         if (!data) {
             return res.json({
                 keralaTotal: 20,
-                keralaSubtotal: 20,
                 ldf: 0,
                 udf: 0,
                 nda: 0
@@ -85,10 +83,10 @@ app.post('/api/data', async (req, res) => {
     }
     console.log('Received data update:', req.body);
     try {
-        const { keralaTotal, keralaSubtotal, ldf, udf, nda } = req.body;
+        const { keralaTotal, ldf, udf, nda } = req.body;
         const data = await ElectionData.findByIdAndUpdate(
             DATA_ID,
-            { keralaTotal, keralaSubtotal, ldf, udf, nda, lastUpdated: Date.now() },
+            { keralaTotal, ldf, udf, nda, lastUpdated: Date.now() },
             { new: true, upsert: true }
         );
         console.log('Update successful for ID:', DATA_ID);

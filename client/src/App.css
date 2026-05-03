@@ -62,6 +62,7 @@ body {
   line-height: 1;
 }
 
+
 .kerala-header { background-color: var(--kerala-bg); }
 .ldf-header { background-color: var(--ldf-bg); }
 .udf-header { background-color: var(--udf-bg); }
@@ -80,25 +81,7 @@ body {
   line-height: 1;
 }
 
-.kerala-content {
-  font-size: 5rem;
-  gap: 12px;
-}
 
-.total-red {
-  color: var(--ldf-bg);
-}
-
-.sub-total-black {
-  color: var(--text-black);
-}
-
-.separator {
-  width: 1px;
-  height: 60%;
-  background-color: #666;
-  margin: 0 5px;
-}
 
 .number {
   color: var(--text-black);
@@ -179,5 +162,5 @@ input {
 @media (max-width: 600px) {
   .header { font-size: 1.8rem; }
   .content { height: 100px; font-size: 3.5rem; }
-  .kerala-content { font-size: 3rem; }
+
 }

@@ -7,7 +7,6 @@ const API_URL = 'https://election-scorecard.onrender.com/api/data';
 const Admin = () => {
     const [formData, setFormData] = useState({
         keralaTotal: 20,
-        keralaSubtotal: 20,
         ldf: 0,
         udf: 0,
         nda: 0
@@ -21,7 +20,6 @@ const Admin = () => {
                 if (res.data) {
                     setFormData({
                         keralaTotal: res.data.keralaTotal ?? 20,
-                        keralaSubtotal: res.data.keralaSubtotal ?? 20,
                         ldf: res.data.ldf ?? 0,
                         udf: res.data.udf ?? 0,
                         nda: res.data.nda ?? 0
@@ -59,26 +57,16 @@ const Admin = () => {
                 <h1 className="admin-title">Admin Panel</h1>
                 
                 <form onSubmit={handleSubmit}>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-                        <div className="form-group">
-                            <label>Kerala Total</label>
-                            <input 
-                                type="number" 
-                                name="keralaTotal" 
-                                value={formData.keralaTotal} 
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label>Kerala Seats</label>
-                            <input 
-                                type="number" 
-                                name="keralaSubtotal" 
-                                value={formData.keralaSubtotal} 
-                                onChange={handleChange}
-                            />
-                        </div>
+                    <div className="form-group">
+                        <label>Kerala Total Seats</label>
+                        <input 
+                            type="number" 
+                            name="keralaTotal" 
+                            value={formData.keralaTotal} 
+                            onChange={handleChange}
+                        />
                     </div>
+
 
                     <div className="form-group">
                         <label style={{ color: 'var(--ldf-bg)' }}>LDF Count</label>

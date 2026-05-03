@@ -7,7 +7,6 @@ const API_URL = 'https://election-scorecard.onrender.com/api/data';
 const Scoreboard = () => {
     const [data, setData] = useState({
         keralaTotal: 20,
-        keralaSubtotal: 20,
         ldf: 0,
         udf: 0,
         nda: 0
@@ -17,7 +16,7 @@ const Scoreboard = () => {
         try {
             const res = await axios.get(`${API_URL}?t=${Date.now()}`);
             // Check if we got a valid JSON object with the expected fields
-            if (res.data && typeof res.data === 'object' && 'keralaTotal' in res.data) {
+            if (res.data && typeof res.data === 'object' && ('keralaTotal' in res.data)) {
                 setData(res.data);
             } else {
                 console.warn('Received invalid data format:', res.data);
@@ -39,13 +38,9 @@ const Scoreboard = () => {
                 {/* Kerala */}
                 <div className="column">
                     <div className="header kerala-header">KERALA</div>
-                    <div className="content kerala-content">
-                        <span key={`total-${data.keralaTotal}`} className="total-red animate-fade">
+                    <div className="content">
+                        <span key={`total-${data.keralaTotal}`} className="number animate-fade">
                             {data.keralaTotal}
-                        </span>
-                        <div className="separator"></div>
-                        <span key={`sub-${data.keralaSubtotal}`} className="sub-total-black animate-fade">
-                            {data.keralaSubtotal}
                         </span>
                     </div>
                 </div>
