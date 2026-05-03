@@ -26,7 +26,7 @@ const Scoreboard = () => {
 
     useEffect(() => {
         fetchData();
-        const interval = setInterval(fetchData, 5000); 
+        const interval = setInterval(fetchData, 5000);
         return () => clearInterval(interval);
     }, []);
 
@@ -68,7 +68,7 @@ const Scoreboard = () => {
                 </div>
             </div>
 
-            <Link to="/admin" style={{ 
+            {/* <Link to="/admin" style={{ 
                 position: 'fixed', 
                 bottom: '20px', 
                 right: '20px', 
@@ -76,7 +76,7 @@ const Scoreboard = () => {
                 textDecoration: 'none', 
                 fontSize: '0.8rem', 
                 opacity: 0.5 
-            }}>Admin Panel</Link>
+            }}>Admin Panel</Link> */}
         </div>
     );
 };
