@@ -23,6 +23,7 @@ mongoose.connect(MONGO_URI, {
     .catch(err => console.log('MongoDB connection error:', err));
 
 const electionSchema = new mongoose.Schema({
+    _id: { type: String, default: 'main_scorecard' },
     keralaTotal: { type: Number, default: 20 },
     keralaSubtotal: { type: Number, default: 20 },
     ldf: { type: Number, default: 5 },
@@ -33,12 +34,18 @@ const electionSchema = new mongoose.Schema({
 
 const ElectionData = mongoose.model('ElectionData', electionSchema);
 
+const DATA_ID = 'main_scorecard';
+
 // Initial data setup if none exists
 const initializeData = async () => {
-    const data = await ElectionData.findOne();
-    if (!data) {
-        await ElectionData.create({});
-        console.log('Initial election data created');
+    try {
+        const data = await ElectionData.findOne({ _id: DATA_ID });
+        if (!data) {
+            await ElectionData.create({ _id: DATA_ID });
+            console.log('Initial election data created with fixed ID');
+        }
+    } catch (err) {
+        console.error('Initialization error:', err);
     }
 };
 // initializeData(); // Moved to .then() above
@@ -52,7 +59,7 @@ app.get('/api/data', async (req, res) => {
         return res.status(503).json({ message: 'Database not connected yet. Please wait a moment.' });
     }
     try {
-        const data = await ElectionData.findOne();
+        const data = await ElectionData.findById(DATA_ID);
         res.json(data || {});
     } catch (err) {
         console.error('GET Error:', err);
@@ -67,12 +74,12 @@ app.post('/api/data', async (req, res) => {
     console.log('Received data update:', req.body);
     try {
         const { keralaTotal, keralaSubtotal, ldf, udf, nda } = req.body;
-        const data = await ElectionData.findOneAndUpdate(
-            {},
+        const data = await ElectionData.findByIdAndUpdate(
+            DATA_ID,
             { keralaTotal, keralaSubtotal, ldf, udf, nda, lastUpdated: Date.now() },
             { new: true, upsert: true }
         );
-        console.log('Update successful');
+        console.log('Update successful for ID:', DATA_ID);
         res.json(data);
     } catch (err) {
         console.error('POST Error:', err);
