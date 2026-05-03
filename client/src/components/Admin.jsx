@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const API_URL = 'http://127.0.0.1:5050/api/data';
+const API_URL = '/api/data';
 
 const Admin = () => {
     const [formData, setFormData] = useState({
