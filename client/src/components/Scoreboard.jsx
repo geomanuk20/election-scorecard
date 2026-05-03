@@ -31,6 +31,7 @@ const Scoreboard = () => {
     }, []);
 
     return (
+
         <div className="container">
             <div className="scoreboard">
                 {/* Kerala */}
@@ -68,15 +69,7 @@ const Scoreboard = () => {
                 </div>
             </div>
 
-            {/* <Link to="/admin" style={{ 
-                position: 'fixed', 
-                bottom: '20px', 
-                right: '20px', 
-                color: '#999', 
-                textDecoration: 'none', 
-                fontSize: '0.8rem', 
-                opacity: 0.5 
-            }}>Admin Panel</Link> */}
+
         </div>
     );
 };

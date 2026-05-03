@@ -34,17 +34,20 @@ body {
 /* Scoreboard Styles */
 .scoreboard {
   display: flex;
-  background: white;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-  border: 1px solid #ddd;
+  background: transparent; /* Changed to transparent to show gaps */
+  gap: 10px; /* Added space between boxes */
+  width: 100%;
 }
 
 .column {
   flex: 1;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid #ddd;
+  background: white; /* Ensure the box itself is white */
+  border-radius: 8px; /* Rounded corners for the 'box' look */
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  border: 1px solid #ddd;
 }
 
 .column:last-child {
