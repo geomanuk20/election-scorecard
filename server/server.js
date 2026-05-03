@@ -55,12 +55,14 @@ app.get('/health', (req, res) => {
 });
 
 app.get('/api/data', async (req, res) => {
+    console.log('GET /api/data request received');
     if (mongoose.connection.readyState !== 1) {
-        return res.status(503).json({ message: 'Database not connected yet. Please wait a moment.' });
+        console.log('DB not connected, state:', mongoose.connection.readyState);
+        return res.status(503).json({ message: 'Database not connected yet' });
     }
     try {
         const data = await ElectionData.findById(DATA_ID);
-        // If no data exists yet, return the default values
+        console.log('Found data:', data ? 'Yes' : 'No');
         if (!data) {
             return res.json({
                 keralaTotal: 20,

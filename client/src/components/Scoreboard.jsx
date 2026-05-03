@@ -15,10 +15,12 @@ const Scoreboard = () => {
 
     const fetchData = async () => {
         try {
-            // Add a timestamp to prevent browser caching
             const res = await axios.get(`${API_URL}?t=${Date.now()}`);
-            if (res.data) {
+            // Check if we got a valid JSON object with the expected fields
+            if (res.data && typeof res.data === 'object' && 'keralaTotal' in res.data) {
                 setData(res.data);
+            } else {
+                console.warn('Received invalid data format:', res.data);
             }
         } catch (err) {
             console.error('Error fetching data:', err);
