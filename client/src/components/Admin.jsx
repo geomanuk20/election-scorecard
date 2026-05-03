@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const API_URL = '/api/data';
+const API_URL = 'https://election-scorecard.onrender.com/api/data';
 
 const Admin = () => {
     const [formData, setFormData] = useState({
