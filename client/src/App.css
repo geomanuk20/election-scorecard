@@ -159,6 +159,23 @@ input {
 .btn-primary { background: var(--kerala-bg); color: white; }
 .btn-secondary { background: #eee; color: #666; }
 
+.animate-fade {
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+    transform: scale(1.1);
+    filter: blur(5px);
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
 @media (max-width: 600px) {
   .header { font-size: 1.8rem; }
   .content { height: 100px; font-size: 3.5rem; }
